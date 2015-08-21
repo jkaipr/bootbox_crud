@@ -1,9 +1,8 @@
 module BootboxCrud
   module Rails
-    require "bootstrap_crud/version"
-    require "bootstrap_crud/engine"
-	require 'bootstrap_crud/action_view/helpers'
-
-	require 'bootstrap_crud/railtie' if defined?(Rails)
+    require "bootbox_crud/version"
+    require "bootbox_crud/engine"
+	require 'bootbox_crud/action_view/helpers'
+	require 'bootbox_crud/railtie' if defined?(Rails)
   end
 end
