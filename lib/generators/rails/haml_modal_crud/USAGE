@@ -1,0 +1,15 @@
+Description:
+    Creates js.erb view files necessary for modal CRUD to work and invokes haml:scaffold generator.
+
+Example:
+    rails generate haml_modal_crud Thing name size:integer
+
+    This will create:
+        app/views/<model>/create.js.erb
+        app/views/<model>/destroy.js.erb
+        app/views/<model>/update.js.erb
+        app/views/<model>/_form.html.haml
+        app/views/<model>/edit.html.haml
+        app/views/<model>/index.html.haml
+        app/views/<model>/new.html.haml
+        app/views/<model>/show.html.haml

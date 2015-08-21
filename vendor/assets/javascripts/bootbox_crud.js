@@ -1,0 +1,2 @@
+//= require modals
+//= require sortable

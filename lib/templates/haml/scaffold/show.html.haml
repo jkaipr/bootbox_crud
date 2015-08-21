@@ -1,0 +1,7 @@
+#content.show
+  %p#notice= notice
+
+  .form-horizontal
+<% for attribute in attributes -%>
+    = show_value '<%= attribute.human_name %>', @<%= singular_table_name %>.<%= attribute.name %>
+<% end -%>

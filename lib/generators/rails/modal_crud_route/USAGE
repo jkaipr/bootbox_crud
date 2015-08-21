@@ -1,0 +1,9 @@
+Description:
+    Adds model definition to app/assets/javascripts/models.js for CRUD modals and invokes resource_route generator to add route to routes.rb
+
+Example:
+    rails generate modal_crud_route Thing name size:integer
+
+    This will create:
+        insert      app/assets/javascripts/models.js
+        generate    resource_route

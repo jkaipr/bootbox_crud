@@ -1,0 +1,51 @@
+.container-fluid
+  %h1 Listing <%= plural_table_name %>
+
+<% has_name = attributes.find {|a| a.name == 'name'}.present? -%>
+
+  .table_responsive
+    %table.table.table-hover.table-striped.sortable-theme-minimal{data: {sortable: ''}}
+      %thead
+        %tr
+<% if has_name -%>
+          %th
+            ID
+          %th{data:{sorted: 'true', sorted_direction: 'ascending' }}
+            Name
+<% else -%>
+          %th{data:{sorted: 'true', sorted_direction: 'ascending' }}
+            ID
+<% end -%>
+<% for attribute in attributes -%>
+<% next if %w{name id}.include? attribute.name -%>
+          %th <%= attribute.human_name %>
+<% end -%>
+          %th{data:{sortable: 'false'}}
+
+      %tbody
+        - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+          %tr
+<% if has_name -%>
+            %td
+              = <%= singular_table_name %>.id
+            %td{data:{value: <%= singular_table_name %>.name.gsub(' ', '').downcase, entity: '<%= singular_table_name.capitalize %>', action: 'show', id: (<%= singular_table_name %>.id) }}
+              = link_to <%= singular_table_name %>.name, '#'
+<% else -%>
+            %td{data:{ entity: '<%= singular_table_name.capitalize %>', action: 'show', id: (<%= singular_table_name %>.id) }}
+              = link_to <%= singular_table_name %>.id, '#'
+<% end -%>
+
+<% for attribute in attributes -%>
+<% next if %w{name id}.include? attribute.name -%>
+            %td= <%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+            %td
+              = link_to '#', :class => 'btn-sm btn-primary', data: { entity: '<%= singular_table_name.capitalize %>', action: 'update', id: (<%= singular_table_name %>.id) } do
+                %i.fa.fa-edit
+                EDIT
+
+  %hr
+  %p
+    = link_to '#', :class => 'btn btn-success', data: { entity: '<%= singular_table_name.capitalize %>', action: 'create' } do
+      %i.fa.fa-plus
+        = 'New <%= human_name %>'

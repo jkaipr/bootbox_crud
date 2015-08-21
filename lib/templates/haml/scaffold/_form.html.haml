@@ -1,0 +1,11 @@
+.container-fluid
+  = simple_form_for(@<%= singular_table_name %>, remote_form_options) do |f|
+    = f.error_notification
+
+    .form-inputs
+    <%- attributes.each do |attribute| -%>
+      = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+    <%- end -%>
+
+    .form-actions.col-sm-7.col-sm-offset-5
+      = f.button :submit

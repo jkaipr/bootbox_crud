@@ -1,0 +1,5 @@
+var modal = $('.bootbox.modal');
+modal.modal('hide');
+BBCrud.Alert.show('<%= alert %>');
+var path = '<%= defined?(visit_path) ? visit_path : nil %>';
+Turbolinks.visit(path === '' ? null : path);

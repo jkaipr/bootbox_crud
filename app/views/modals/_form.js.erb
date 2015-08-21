@@ -1,0 +1,16 @@
+var modal = $('.bootbox.modal');
+<%- if model.errors.any? %>
+    BBCrud.Alert.show('<%= error_alert %>');
+    <% if remotipart_submitted? %>
+        var form = "<%= j "#{render(form_path)}" %>";
+    <% else %>
+        var form = "<%= j render(form_path) %>";
+    <% end %>
+    modal.find('.modal-body').html(form);
+    modal.find('input[type="submit"]').hide();
+<%- else %>
+    BBCrud.Alert.show('<%= success_alert %>');
+    modal.modal('hide');
+    var path = '<%= defined?(visit_path) ? visit_path : nil %>';
+    Turbolinks.visit(path === '' ? null : path);
+<%- end %>
