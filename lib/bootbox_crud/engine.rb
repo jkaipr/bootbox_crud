@@ -1,6 +1,6 @@
 module BootboxCrud
   module Rails
-    class Engine < Rails::Engine
+    class Engine < ::Rails::Engine
     end
   end
 end
