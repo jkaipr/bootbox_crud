@@ -113,7 +113,7 @@ BBCrud.Modals = function () {
         initBtnHandler: function() {
             $(document).on('click', '[data-entity]', function() {
                 var link = $(this);
-                var args = link.data();
+                var args = $.extend({}, link.data());
                 delete args['entity'];
                 delete args['action'];
                 BBCrud[link.data('entity')][link.data('action')].call(link, args);
