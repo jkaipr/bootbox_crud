@@ -4,7 +4,7 @@ class Rails::ModalCrudRouteGenerator < Rails::Generators::NamedBase
 
   def add_resource_route
     if Rails.application.assets.find_asset('models.js').blank?
-      copy_file "templates/models.js", "app/assets/javascripts/models.js"
+      copy_file "models.js", "app/assets/javascripts/models.js"
     end
     inject_into_file 'app/assets/javascripts/models.js', after: "//!!! Generator adds after this line, do not delete it !!!\n" do
       "BBCrud.Models.add('#{name}', '/#{controller_name.underscore}/', '#{name.underscore}');\n"
