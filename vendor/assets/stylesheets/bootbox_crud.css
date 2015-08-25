@@ -1,0 +1,27 @@
+/*
+ *= require sortable-theme-minimal
+ */
+
+// show modal not looking like input form
+#content.show {
+  .form-control {
+    border: none;
+    @include box-shadow(none);
+  }
+}
+
+// nested form inputs looking the same as root form inputs
+.form-group .form-group {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.bb-alert {
+  position: fixed;
+  top: 65px;
+  right: 15px;
+  margin-bottom: 0;
+  font-size: 1.2em;
+  padding: 1em 1.3em;
+  z-index: 9999;
+}
