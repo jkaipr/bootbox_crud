@@ -14,6 +14,8 @@ Gem::Specification.new do |gem|
   gem.platform      = Gem::Platform::RUBY
 
   gem.add_dependency "railties", ">= 4.0"
+  gem.add_dependency "sass-rails", "~> 5.0"
+  gem.add_dependency "bootstrap-sass", "~> 3.0"
   gem.add_dependency "haml", "~> 4.0"
   gem.add_dependency "haml-rails", "~> 0.7"
   gem.add_dependency "simple_form", "~> 3.0"
