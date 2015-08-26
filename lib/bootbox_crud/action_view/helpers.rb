@@ -13,6 +13,10 @@ module BootboxCrud
         render :partial => 'layouts/show_link_to_array', :locals => { :label => label, :objects => objects, :field => name_object_field }
       end
 
+      def bb_alert
+        render :partial => 'layouts/bb_alert'
+      end
+
       def form_options
         { html: { class: 'form-horizontal' }, 
           wrapper: :horizontal_form, 
