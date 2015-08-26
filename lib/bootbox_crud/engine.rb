@@ -5,6 +5,12 @@ module BootboxCrud
       require 'haml'
       require 'simple_form'
 
+      initializer "bootbox_crud.configure_view" do |app|
+        ActiveSupport.on_load :action_view do
+          include BootboxCrud::ActionView::Helpers
+        end
+      end
+
       config.app_generators do |g|
         g.templates.unshift File::expand_path('../../templates', __FILE__)
       end 
