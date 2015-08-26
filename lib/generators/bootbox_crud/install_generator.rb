@@ -1,6 +1,5 @@
-module BootboxCrud
-  module Generators
-    class InstallGenerator < Rails::Generators::Base
+class BootboxCrud::InstallGenerator < Rails::Generators::Base
+      include Rails::Generators::ResourceHelpers
       desc "Copies BootboxCrud default files"
       source_root File.expand_path('../templates', __FILE__)
 
@@ -18,5 +17,4 @@ module BootboxCrud
         end
       end
     end
-  end
 end
