@@ -14,4 +14,3 @@ class BootboxCrud::InstallGenerator < ::Rails::Generators::Base
     end
   end
 end
-end
