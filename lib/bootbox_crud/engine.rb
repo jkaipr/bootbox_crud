@@ -6,6 +6,9 @@ module BootboxCrud
       require 'bootbox-rails'
       require 'haml'
       require 'simple_form'
+      require 'jquery-rails'
+      require 'turbolinks'
+      require 'jquery-turbolinks'
 
       initializer "bootbox_crud.configure_view" do |app|
         ActiveSupport.on_load :action_view do
