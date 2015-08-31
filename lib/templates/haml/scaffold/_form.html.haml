@@ -1,6 +1,7 @@
 .container-fluid
   = simple_form_for(@<%= singular_table_name %>, remote_form_options) do |f|
     = f.error_notification
+    = f.error :base, :error_method => :to_sentence
 
     .form-inputs
     <%- attributes.each do |attribute| -%>

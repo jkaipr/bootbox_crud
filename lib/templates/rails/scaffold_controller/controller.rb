@@ -71,11 +71,16 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # DELETE <%= route_url %>/1
   def destroy
-    @<%= orm_instance.destroy %>
     respond_to do |format|
-      format.html { redirect_to <%= index_helper %>_url }
-      format.json { head :no_content }
-      format.js
+      if @<%= orm_instance.destroy %>    
+        format.html { redirect_to <%= index_helper %>_url }
+        format.json { head :no_content }
+        format.js
+      else
+        format.html { redirect_to <%= index_helper %>_url }
+        format.json { render json: @<%= singular_table_name %>.errors, status: :forbidden }
+        format.js { render status: :forbidden }
+      end
     end
   end
 

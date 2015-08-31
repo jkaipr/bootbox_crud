@@ -1,1 +1,1 @@
-<%%= render partial: 'modals/destroy' %>
+<%%= render partial: 'modals/destroy', locals: { model: @<%= singular_table_name %>, form_path: '<%= plural_table_name %>/form' } %>
