@@ -1,5 +1,7 @@
 # Bootbox modal CRUD
 
+Provides Rails modal CRUD scaffolding powered by bootstrap & bootbox & simple_form. Built for use with Turbolinks, jQuery and Twitter Bootstrap 3.
+
 ## Initial setup
 
 Set custom scaffolding generators in your ```config/application.rb```
@@ -291,3 +293,9 @@ If you want have a peek or override some of the scaffolding templates, here is a
 **controller scaffold template override**
 
     lib/templates/rails/scaffold_controller/controller.rb
+
+# TODOs
+
+ * I18n support on client side
+ * Improve BBCrud.Alert / integration with Rails flash messages
+ * Generator tests

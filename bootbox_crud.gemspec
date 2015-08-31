@@ -3,7 +3,7 @@ require File.expand_path('../lib/bootbox_crud/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Jiri Kaipr"]
   gem.email         = ["jiri.kaipr@gmail.com"]
-  gem.description   = %q{Provides rails modal CRUD scaffolding powered by bootstrap & bootbox & simple_form. Built for use with jQuery and Twitter Bootstrap 3.}
+  gem.description   = %q{Provides Rails modal CRUD scaffolding powered by bootstrap & bootbox & simple_form. Built for use with Turbolinks, jQuery and Twitter Bootstrap 3.}
   gem.homepage      = "https://github.com/jkaipr/bootstrap-validator-rails"
   gem.summary       = %q{Rails CRUD scaffold with bootbox modals.}
 
