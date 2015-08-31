@@ -1,1 +1,1 @@
-<%= render partial: 'modals/form', locals: { model: model, form_path: form_path, success_alert: 'Updated' , error_alert: 'Error while updating', visit_path: defined?(visit_path) ? visit_path : nil } %>
+<%= render partial: 'modals/form', locals: { model: model, form_path: form_path, success_alert: defined?(success_alert) ? success_alert : 'Updated' , error_alert: defined?(error_alert) ? error_alert : 'Error while updating', visit_path: defined?(visit_path) ? visit_path : nil } %>
