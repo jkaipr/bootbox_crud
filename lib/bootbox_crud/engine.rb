@@ -5,6 +5,7 @@ module BootboxCrud
       require 'bootstrap-sass'
       require 'bootbox-rails'
       require 'haml'
+      require 'haml-rails'
       require 'simple_form'
       require 'jquery-rails'
       require 'turbolinks'
