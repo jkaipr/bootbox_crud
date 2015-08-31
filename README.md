@@ -1,57 +1,58 @@
-# Custom modal CRUD scaffold
+# Bootbox modal CRUD
 
-Custom scaffolding is enabled in the project. The resulting files are following the rules described in Modal CRUD section.
+## Initial setup
 
-     $ bundle exec rails g scaffold Block name width:integer height:integer depth:integer
-
-The above code will give you a ready to use, nicely formatted modal enabled Block CRUD. Just migrate the DB.
-
-Custom scaffoled generators are configured inside of ```app/config/application.rb```
+Set custom scaffolding generators in your ```config/application.rb```
 
     config.generators do |g|
       g.template_engine :haml_modal_crud
       g.resource_route  :modal_crud_route
     end
 
-### Custom scaffold source files
+Require the main javascript file in your ```app/assets/javascripts/application.js```
 
-**haml\_modal\_crud**
+    //= require bootbox_crud_main
 
-    app/lib/generators/rails/haml_modal_crud/templates/create.js.erb
-    app/lib/generators/rails/haml_modal_crud/templates/destroy.js.erb
-    app/lib/generators/rails/haml_modal_crud/templates/update.js.erb
-    app/lib/generators/rails/haml_modal_crud/haml_modal_crud_generator.rb
-    app/lib/generators/rails/haml_modal_crud/USAGE
+Require the main stylesheet file in your ```app/assets/stylesheets/application.css``` and also don't forget to add the main Bootstrap stylesheet
 
-**modal\_crud\_route**
+    *= require bootstrap
+    *= require bootbox_crud_main
 
-    app/lib/generators/rails/modal_crud_route/modal_crud_route_generator.rb
+Add bootbox alert markup into the main container of your ```app/views/layouts/application.html.haml```
 
-**haml scaffold templates override**
+    %body
+      .container
+        = yeild
+        = bb_alert
 
-    app/lib/templates/haml/scaffold/_form.html.haml
-    app/lib/templates/haml/scaffold/edit.html.haml
-    app/lib/templates/haml/scaffold/index.html.haml
-    app/lib/templates/haml/scaffold/new.html.haml
-    app/lib/templates/haml/scaffold/show.html.haml
+Run the install generator to copy over default simple_form initializers and models.js for defining modal CRUD enabled models
 
-**controller scaffold template override**
+    $ bundle exec rails g bootbox_crud:install
 
-    app/lib/templates/rails/scaffold_controller/controller.rb
+## Scaffolding
+
+Custom model scaffolding is enabled by installing and configuring this gem. The generated files are following the rules described in the Modal CRUD section.
+
+     $ bundle exec rails g scaffold Block name width:integer height:integer depth:integer
+
+The above code will give you a ready to use, nicely formatted modal enabled Block CRUD. Just migrate the DB.
 
 # Modal CRUD with  [bootbox.js](https://github.com/rocsci/bootbox-rails)
 
 This concept is a work in progress and suggestions are welcome.
 
-Main source files are:
+Main source files are in the gem:
 
-    app/assets/javascripts/modals.js
-    app/assets/javascripts/models.js
+    vendor/assets/javascripts/bootbox_crud_modals.js
     app/views/modals/_form.js
     app/views/modals/_alert.js
     app/views/modals/_create.js
     app/views/modals/_destroy.js
     app/views/modals/_update.js
+
+and in your application
+
+    app/assets/javascripts/models.js
 
 ## Controller
 
@@ -119,7 +120,7 @@ Three new files have to be added to the views directory of the related model:
 
 **destroy.js.erb**
 
-    <%= render partial: 'modals/destroy' %>
+    <%= render partial: 'modals/destroy', locals: { model: @model, form_path: 'model/form' } %>
 
 
 The partials in app/views/modals directory should provide the necessary functionality for most cases. If you need some special behaviour, implement it instead of rendering the partial.
@@ -261,3 +262,32 @@ The important detail to notice is the use of ```modals/form``` partial, which wa
  * Add create, update and destroy .js.erb files to the view directory and fill them according to this guide
  * Add your model definition as a new line to models.js
  * Add ```data-entity```, ```data-action``` and ```data-id``` with the right values to an element on the page and click it, or call ``BBCrud.ModelName.create/update/show()`` from your javascript to show the modal
+
+
+## Custom scaffold source files
+
+If you want have a peek or override some of the scaffolding templates, here is an overview of the files used:
+
+**haml\_modal\_crud**
+
+    lib/generators/rails/haml_modal_crud/templates/create.js.erb
+    lib/generators/rails/haml_modal_crud/templates/destroy.js.erb
+    lib/generators/rails/haml_modal_crud/templates/update.js.erb
+    lib/generators/rails/haml_modal_crud/haml_modal_crud_generator.rb
+    lib/generators/rails/haml_modal_crud/USAGE
+
+**modal\_crud\_route**
+
+    lib/generators/rails/modal_crud_route/modal_crud_route_generator.rb
+
+**haml scaffold templates override**
+
+    lib/templates/haml/scaffold/_form.html.haml
+    lib/templates/haml/scaffold/edit.html.haml
+    lib/templates/haml/scaffold/index.html.haml
+    lib/templates/haml/scaffold/new.html.haml
+    lib/templates/haml/scaffold/show.html.haml
+
+**controller scaffold template override**
+
+    lib/templates/rails/scaffold_controller/controller.rb
