@@ -1,10 +1,7 @@
 module BootboxCrud
   module Rails
     class Engine < ::Rails::Engine
-      require 'sass-rails'
-      require 'bootstrap-sass'
       require 'bootbox-rails'
-      require 'haml'
       require 'haml-rails'
       require 'simple_form'
       require 'jquery-rails'
