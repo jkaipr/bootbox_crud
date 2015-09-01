@@ -14,6 +14,35 @@
   margin-right: 0px;
 }
 
+.form-horizontal .control-label {
+  padding: 7px 0px;
+  line-height: 20px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  ont-weight: normal;
+  text-shadow: none;
+  color: #595959;
+}
+
+[data-bb-handler|=delete]{
+  float: left;
+  margin-left: 0 !important;
+}
+
+[data-bb-handler|=close]{
+  float: right;
+  margin-left: 10px;
+}
+
+.form-horizontal .checkbox, .form-horizontal .checkbox > label {
+  padding: 0;
+}
+
+.form-horizontal .checkbox, .form-horizontal .checkbox > label {
+  margin-left: 10px;
+}
+
 .bb-alert {
   position: fixed;
   top: 65px;
