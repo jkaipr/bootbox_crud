@@ -74,9 +74,9 @@ BBCrud.Modals = function () {
                         type: 'DELETE'
                     }).success(function () {
                             if (typeof exec != 'undefined') { exec(); }
-                            VM.Alert.show('Deleted');
+                            BBCrud.Alert.show('Deleted');
                         }).error(function () {
-                            VM.Alert.show('Something went wrong!');
+                            BBCrud.Alert.show('Something went wrong!');
                         });
                 }
             });
