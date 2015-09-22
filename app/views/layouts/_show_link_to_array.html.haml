@@ -3,4 +3,4 @@
   .col-sm-6
     - objects.each do |o|
       .form-control
-        = link_to o[field], o
+        = link_to o.send(field), o
