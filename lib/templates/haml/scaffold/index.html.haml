@@ -28,10 +28,10 @@
 <% if has_name -%>
             %td
               = <%= singular_table_name %>.id
-            %td{data:{value: <%= singular_table_name %>.name.gsub(' ', '').downcase, entity: '<%= singular_table_name.capitalize %>', action: 'show', id: (<%= singular_table_name %>.id) }}
+            %td{data:{value: <%= singular_table_name %>.name.gsub(' ', '').downcase, entity: '<%= class_name %>', action: 'show', id: (<%= singular_table_name %>.id) }}
               = link_to <%= singular_table_name %>.name, '#'
 <% else -%>
-            %td{data:{ entity: '<%= singular_table_name.capitalize %>', action: 'show', id: (<%= singular_table_name %>.id) }}
+            %td{data:{ entity: '<%= class_name %>', action: 'show', id: (<%= singular_table_name %>.id) }}
               = link_to <%= singular_table_name %>.id, '#'
 <% end -%>
 
@@ -40,12 +40,12 @@
             %td= <%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
             %td
-              = link_to '#', :class => 'btn-sm btn-primary', data: { entity: '<%= singular_table_name.capitalize %>', action: 'update', id: (<%= singular_table_name %>.id) } do
+              = link_to '#', :class => 'btn-sm btn-primary', data: { entity: '<%= class_name %>', action: 'update', id: (<%= singular_table_name %>.id) } do
                 %i.fa.fa-edit
                 EDIT
 
   %hr
   %p
-    = link_to '#', :class => 'btn btn-success', data: { entity: '<%= singular_table_name.capitalize %>', action: 'create' } do
+    = link_to '#', :class => 'btn btn-success', data: { entity: '<%= class_name %>', action: 'create' } do
       %i.fa.fa-plus
         = 'New <%= human_name %>'
