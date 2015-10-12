@@ -4,6 +4,7 @@ BBCrud.Modals = function () {
 
     var modals = {
         form: function(id, title, btnLabel, url, exec, timeout, timeoutExec, options) {
+            options = $.extend({ data: {} }, options);
             var buttons = {
                 close: {
                     "label" : "Close"
@@ -12,7 +13,7 @@ BBCrud.Modals = function () {
                     "label" : btnLabel,
                     "className" : "btn-success",
                     "callback": function() {
-                        if (options.dontSubmit !== true) {
+                        if (options.data.bbDontSubmit !== true) {
                             $('.bootbox.modal').find('input[type="submit"]').closest('form').submit();
                         }
                         if (timeoutExec !== null && typeof timeoutExec != 'undefined') { setTimeout(timeoutExec, timeout); }
@@ -20,7 +21,7 @@ BBCrud.Modals = function () {
                     }
                 }
             };
-            if (id !== -1 && options.showDeleteBtn !== false) {
+            if (id !== -1 && options.data.bbShowDelete !== false) {
                 $.extend(buttons, {
                     delete: {
                         "label" : "Delete",
@@ -33,7 +34,16 @@ BBCrud.Modals = function () {
                 })
             }
 
-            var modal = bootbox.dialog({
+            var bbOptions = Object.keys(options.data).reduce(function (result, key) {
+                if (key.indexOf('bb') != -1) {
+                    var cleanKey = key.replace('bb', '');
+                    cleanKey = cleanKey[0].toLowerCase() + cleanKey.slice(1);
+                    result[cleanKey] = options.data[key];
+                }
+                return result;
+            }, {});
+
+            var modal = bootbox.dialog($.extend(bbOptions || {}, {
                 message  : "Loading form...",
                 title    : title,
                 backdrop : "static",
@@ -41,8 +51,16 @@ BBCrud.Modals = function () {
                 show     : true,
                 header   : title,
                 buttons: buttons
-            });
-            $.get(url, options.data, function(data) {
+            }));
+
+            var reqParams = Object.keys(options.data).reduce(function (result, key) {
+                if (key.indexOf('bb') == -1) {
+                    result[key] = options.data[key];
+                }
+                return result;
+            }, {});
+
+            $.get(url, reqParams, function(data) {
                 var result = $(data);
                 var content = result.attr('id') === 'content' ? result : result.find('#content');
                 modal.find('.modal-body').html(content);
@@ -62,7 +80,7 @@ BBCrud.Modals = function () {
         other: function (id, title, baseUrl, actionName, exec, timeout, timeoutExec, data) {
             if (typeof id === 'object') id = id.id;
             var url = baseUrl + id + '/' + actionName;
-            modals.form(id, title, actionName.charAt(0).toUpperCase() + actionName.slice(1), url, exec, timeout, timeoutExec, { baseUrl: baseUrl, data: data, showDeleteBtn: false });
+            modals.form(id, title, actionName.charAt(0).toUpperCase() + actionName.slice(1), url, exec, timeout, timeoutExec, { baseUrl: baseUrl, data: $.extend({'bb-show-delete': false}, data) });
         },
         delete: function (id, baseUrl, exec) {
             bootbox.confirm('Are you sure?', function(result) {
@@ -73,16 +91,16 @@ BBCrud.Modals = function () {
                         dataType: 'script',
                         type: 'DELETE'
                     }).success(function () {
-                            if (typeof exec != 'undefined') { exec(); }
-                            BBCrud.Alert.show('Deleted');
-                        }).error(function () {
-                            BBCrud.Alert.show('Something went wrong!');
-                        });
+                        if (typeof exec != 'undefined') { exec(); }
+                        BBCrud.Alert.show('Deleted');
+                    }).error(function () {
+                        BBCrud.Alert.show('Something went wrong!');
+                    });
                 }
             });
         },
-        show: function(id, title, baseUrl) {
-            var modal = bootbox.dialog({
+        show: function(id, title, baseUrl, data) {
+            var modal = bootbox.dialog($.extend(data.bb, {
                 message  : "Loading form...",
                 title    : title,
                 backdrop : "static",
@@ -94,17 +112,17 @@ BBCrud.Modals = function () {
                         "label" : "Close"
                     }
                 }
-            });
-            $.get(baseUrl + id, function(data) {
-                handleResponse(data);
+            }));
+            $.get(baseUrl + id, function(result) {
+                handleResponse(result);
             }).error(function (response) {
                 if (response.status === 200) {
                     handleResponse(response.responseText);
                 }
                 console.log(response);
             });
-            function handleResponse(data) {
-                var result = $(data);
+            function handleResponse(response) {
+                var result = $(response);
                 var content = result.attr('id') === 'content' ? result : result.find('#content');
                 modal.find('.modal-body').html(content);
             }
@@ -134,7 +152,7 @@ BBCrud.Models = function () {
             $.extend(BBCrud[modelName], actions);
         }
     }
-    
+
     var models = {
         add: function(modelName, url, titleName) {
             var modelCRUD = function () {
@@ -145,10 +163,10 @@ BBCrud.Models = function () {
                         BBCrud.Modals.create('Create ' + titleName, baseUrl, null, data);
                     },
                     update: function (data) {
-                        BBCrud.Modals.update(data.id, 'Edit ' + titleName, baseUrl);
+                        BBCrud.Modals.update(data.id, 'Edit ' + titleName, baseUrl, undefined, false, undefined, undefined, data);
                     },
                     show: function (data) {
-                        BBCrud.Modals.show(data.id, titleName.charAt(0).toUpperCase() + titleName.slice(1) + ' detail', baseUrl);
+                        BBCrud.Modals.show(data.id, titleName.charAt(0).toUpperCase() + titleName.slice(1) + ' detail', baseUrl, data);
                     }
                 };
                 return methods;
@@ -202,5 +220,5 @@ BBCrud.Alert = function() {
 }();
 
 $(function() {
-   BBCrud.Alert.init({selector: '.bb-alert'});
+    BBCrud.Alert.init({selector: '.bb-alert'});
 });
