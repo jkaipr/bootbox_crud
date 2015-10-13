@@ -11,6 +11,8 @@ var modal = $('.bootbox.modal');
 <%- else %>
     BBCrud.Alert.show('<%= success_alert %>');
     modal.modal('hide');
-    var path = '<%= defined?(visit_path) ? visit_path : nil %>';
-    if (path !== false) Turbolinks.visit(path === '' ? null : path);
+    <%- if defined?(visit_path) && visit_path != false %>
+        var path = '<%= defined?(visit_path) ? visit_path : nil %>';
+        Turbolinks.visit(path === '' ? null : path);
+    <%- end %>
 <%- end %>
