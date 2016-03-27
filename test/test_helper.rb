@@ -1,5 +1,8 @@
 ENV['RAILS_ENV'] = 'test'
 
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
+
 require 'rails'
 require 'rails/test_help'
 require 'rails/generators/base'
