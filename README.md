@@ -1,4 +1,5 @@
 # Bootbox modal CRUD
+[![Build Status](https://travis-ci.org/Virtualmaster/bootbox_crud.svg)](https://travis-ci.org/Virtualmaster/bootbox_crud)
 
 Provides Rails modal CRUD scaffolding powered by bootstrap & bootbox & simple_form. Built for use with Turbolinks, jQuery and Twitter Bootstrap 3.
 
