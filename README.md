@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Virtualmaster/bootbox_crud.png)](https://travis-ci.org/Virtualmaster/bootbox_crud)
+[![Test Coverage](https://codeclimate.com/github/Virtualmaster/bootbox_crud/badges/coverage.svg)](https://codeclimate.com/github/Virtualmaster/bootbox_crud/coverage)
 [![Code Climate](https://codeclimate.com/github/Virtualmaster/bootbox_crud.png)](https://codeclimate.com/github/Virtualmaster/bootbox_crud)
 # Bootbox modal CRUD
 
