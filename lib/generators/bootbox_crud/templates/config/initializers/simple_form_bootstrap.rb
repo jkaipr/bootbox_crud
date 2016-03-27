@@ -1,12 +1,17 @@
 # Use this setup block to configure all options available in SimpleForm.
+
+def html5_placeholder(wrapper)
+  wrapper.use :html5
+  wrapper.use :placeholder
+end
+
 SimpleForm.setup do |config|
   config.error_notification_class = 'alert alert-danger'
   config.button_class = 'btn btn-success'
   config.boolean_label_class = nil
 
   config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.use :placeholder
+    html5_placeholder b
     b.optional :maxlength
     b.optional :pattern
     b.optional :min_max
@@ -19,8 +24,7 @@ SimpleForm.setup do |config|
   end
 
   config.wrappers :vertical_file_input, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.use :placeholder
+    html5_placeholder b
     b.optional :maxlength
     b.optional :readonly
     b.use :label, class: 'control-label'
@@ -52,8 +56,7 @@ SimpleForm.setup do |config|
   end
 
   config.wrappers :horizontal_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.use :placeholder
+    html5_placeholder b
     b.optional :maxlength
     b.optional :pattern
     b.optional :min_max
@@ -68,8 +71,7 @@ SimpleForm.setup do |config|
   end
 
   config.wrappers :horizontal_file_input, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.use :placeholder
+    html5_placeholder b
     b.optional :maxlength
     b.optional :readonly
     b.use :label, class: 'col-sm-5 control-label'
@@ -108,8 +110,7 @@ SimpleForm.setup do |config|
   end
 
   config.wrappers :inline_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.use :placeholder
+    html5_placeholder b
     b.optional :maxlength
     b.optional :pattern
     b.optional :min_max
@@ -122,8 +123,7 @@ SimpleForm.setup do |config|
   end
 
   config.wrappers :vertical_input_group, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.use :placeholder
+    html5_placeholder b
     b.use :label, class: 'control-label'
 
     b.wrapper tag: 'div' do |ba|
@@ -136,8 +136,7 @@ SimpleForm.setup do |config|
   end
 
   config.wrappers :horizontal_input_group, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.use :placeholder
+    html5_placeholder b
     b.use :label, class: 'col-sm-3 control-label'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|

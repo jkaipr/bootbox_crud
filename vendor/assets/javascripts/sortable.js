@@ -1,5 +1,6 @@
+// https://github.com/HubSpot/sortable
 (function() {
-  var SELECTOR, addEventListener, clickEvent, numberRegExp, sortable, touchDevice, trimRegExp;
+  var SELECTOR, addEventListener, clickEvent, numberRegExp, sortable, trimRegExp; // touchDevice
 
   SELECTOR = 'table[data-sortable]';
 
@@ -12,7 +13,7 @@
   clickEvent = 'click';//touchDevice ? 'touchstart' : 'click';
 
   addEventListener = function(el, event, handler) {
-    if (el.addEventListener != null) {
+    if (el.addEventListener !== null) {
       return el.addEventListener(event, handler, false);
     } else {
       return el.attachEvent("on" + event, handler);
@@ -22,10 +23,10 @@
   sortable = {
     init: function(options) {
       var table, tables, _i, _len, _results;
-      if (options == null) {
+      if (options === null) {
         options = {};
       }
-      if (options.selector == null) {
+      if (options.selector === null) {
         options.selector = SELECTOR;
       }
       tables = document.querySelectorAll(options.selector);
@@ -38,7 +39,7 @@
     },
     initTable: function(table) {
       var i, th, ths, _i, _len, _ref;
-      if (((_ref = table.tHead) != null ? _ref.rows.length : void 0) !== 1) {
+      if (((_ref = table.tHead) !== null ? _ref.rows.length : undefined) !== 1) {
         return;
       }
       if (table.getAttribute('data-sortable-initialized') === 'true') {
@@ -58,7 +59,7 @@
       var type;
       type = sortable.getColumnType(table, i);
       return addEventListener(th, clickEvent, function(e) {
-          console.log(e.type);
+        console.log(e.type);
 
         var newSortedDirection, row, rowArray, rowArrayObject, sorted, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
         sorted = this.getAttribute('data-sorted') === 'true';
@@ -120,7 +121,7 @@
       if (!node) {
         return '';
       }
-      if (node.getAttribute('data-value') !== null) {
+      if (node.getAttribute('data-value')) {
         return node.getAttribute('data-value');
       }
       if (typeof node.innerText !== 'undefined') {
@@ -133,8 +134,8 @@
         defaultSortDirection: 'descending',
         compare: function(a, b) {
           var aa, bb;
-          aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''), 10);
-          bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''), 10);
+          aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''));
+          bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''));
           if (isNaN(aa)) {
             aa = 0;
           }
@@ -170,7 +171,7 @@
 
   window.Sortable = sortable;
 
-}).call(this);
+}());
 
 $(function() {
     window.Sortable.init();

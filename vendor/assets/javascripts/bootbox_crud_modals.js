@@ -1,9 +1,24 @@
 var BBCrud = BBCrud || {};
 
-BBCrud.Modals = function () {
+BBCrud.Modals = (function () {
 
     var modals = {
-        form: function(id, title, btnLabel, url, exec, timeout, timeoutExec, options) {
+      /**
+       * Displays a bootbox modal dialog form.
+       * @param {Number} id related model id
+       * @param {String} title modal dialog title
+       * @param {String} btnLabel submit button label
+       * @param {String} url URL address pointing to rails route with form partial
+       * @param {Function} [onLoad] function to be executed after successfully loading the form partial into the modal dialog
+       * @param {Number} [onSubmitTimeout] timeout to use with onSubmit function, if it is defined
+       * @param {Function} [onSubmit] function to be executed after the form was submitted
+       * @param {Object} options
+       * @param {String} options.baseUrl related model base URL, used for delete button
+       * @param {Object} options.data
+       * @param {Boolean} [options.data.bbDontSubmit] prohibits form submission if set to true, submit just hides the dialog
+       * @param {Boolean} [options.data.bbShowDelete] set to true if you don't want to show a delete button on the dialog
+       */
+        form: function(id, title, btnLabel, url, onLoad, onSubmitTimeout, onSubmit, options) {
             options = $.extend({ data: {} }, options);
             var buttons = {
                 close: {
@@ -16,7 +31,7 @@ BBCrud.Modals = function () {
                         if (options.data.bbDontSubmit !== true) {
                             $('.bootbox.modal').find('input[type="submit"]').closest('form').submit();
                         }
-                        if (timeoutExec !== null && typeof timeoutExec != 'undefined') { setTimeout(timeoutExec, timeout); }
+                        if (onSubmit !== null && typeof onSubmit !== 'undefined') { setTimeout(onSubmit, onSubmitTimeout); }
                         return false;
                     }
                 }
@@ -35,7 +50,7 @@ BBCrud.Modals = function () {
             }
 
             var bbOptions = Object.keys(options.data).reduce(function (result, key) {
-                if (key.indexOf('bb') != -1) {
+                if (key.indexOf('bb') !== -1) {
                     var cleanKey = key.replace('bb', '');
                     cleanKey = cleanKey[0].toLowerCase() + cleanKey.slice(1);
                     result[cleanKey] = options.data[key];
@@ -54,7 +69,7 @@ BBCrud.Modals = function () {
             }));
 
             var reqParams = Object.keys(options.data).reduce(function (result, key) {
-                if (key.indexOf('bb') == -1) {
+                if (key.indexOf('bb') === -1) {
                     result[key] = options.data[key];
                 }
                 return result;
@@ -65,7 +80,7 @@ BBCrud.Modals = function () {
                 var content = result.attr('id') === 'content' ? result : result.find('#content');
                 modal.find('.modal-body').html(content);
                 modal.find('.form-actions').hide();
-                if (exec !== null && typeof exec != 'undefined') { exec(); }
+                if (onLoad !== null && typeof onLoad !== 'undefined') { onLoad(); }
             });
         },
         create: function (title, baseUrl, exec, data) {
@@ -91,7 +106,7 @@ BBCrud.Modals = function () {
                         dataType: 'script',
                         type: 'DELETE'
                     }).success(function () {
-                        if (typeof exec != 'undefined') { exec(); }
+                        if (typeof exec !== 'undefined') { exec(); }
                         BBCrud.Alert.show('Deleted');
                     }).error(function () {
                         BBCrud.Alert.show('Something went wrong!');
@@ -140,11 +155,11 @@ BBCrud.Modals = function () {
         }
     };
     return modals;
-}();
+}());
 
 BBCrud.Modals.initBtnHandler();
 
-BBCrud.Models = function () {
+BBCrud.Models = (function () {
     function defineModelActions(modelName, actions) {
         if (typeof BBCrud[modelName] === 'undefined') {
             BBCrud[modelName] = actions;
@@ -153,12 +168,12 @@ BBCrud.Models = function () {
         }
     }
 
-    var models = {
+    return {
         add: function(modelName, url, titleName) {
-            var modelCRUD = function () {
+            var modelCRUD = (function () {
                 var baseUrl = url;
 
-                var methods = {
+                return {
                     create: function (data) {
                         BBCrud.Modals.create('Create ' + titleName, baseUrl, null, data);
                     },
@@ -169,13 +184,12 @@ BBCrud.Models = function () {
                         BBCrud.Modals.show(data.id, titleName.charAt(0).toUpperCase() + titleName.slice(1) + ' detail', baseUrl, data);
                     }
                 };
-                return methods;
-            }();
+            }());
 
             defineModelActions(modelName, modelCRUD);
         },
         addAction: function(modelName, url, titleName, actionName) {
-            var action = function () {
+            var action = (function () {
                 var baseUrl = url;
                 var modelAction = {};
                 modelAction[actionName] = function (data) {
@@ -183,16 +197,15 @@ BBCrud.Models = function () {
                         baseUrl, actionName, null, 0, null, data);
                 };
                 return modelAction;
-            }();
+            }());
             defineModelActions(modelName, action);
         }
 
     };
-    return models;
-}();
+}());
 
 
-BBCrud.Alert = function() {
+BBCrud.Alert = (function() {
     var elem,
         hideHandler,
         alert = {};
@@ -217,7 +230,7 @@ BBCrud.Alert = function() {
     };
 
     return alert;
-}();
+}());
 
 $(function() {
     BBCrud.Alert.init({selector: '.bb-alert'});
