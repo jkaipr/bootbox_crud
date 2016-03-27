@@ -18,3 +18,4 @@ ratings:
   - "**.rb"
 exclude_paths:
 - test/
+- lib/templates
