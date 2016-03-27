@@ -301,4 +301,3 @@ If you want have a peek or override some of the scaffolding templates, here is a
 
  * I18n support on client side
  * Improve BBCrud.Alert / integration with Rails flash messages
- * Generator tests
