@@ -10,5 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
+//= require jquery.turbolinks
+//= require jquery_ujs
+//= require bootbox
 //= require bootbox_crud_main
+//= require turbolinks
 //= require_tree .
