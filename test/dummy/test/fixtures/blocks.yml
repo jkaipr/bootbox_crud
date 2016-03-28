@@ -1,13 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: Lego
   width: 1
   height: 1
   depth: 1
 
 two:
-  name: MyString
-  width: 1
-  height: 1
-  depth: 1
+  name: Big block
+  width: 10
+  height: 10
+  depth: 10
+
+three:
+  name: Container
+  width: 100
+  height: 100
+  depth: 100

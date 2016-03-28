@@ -25,5 +25,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "jquery-turbolinks", "~> 2.1"
   gem.add_dependency "remotipart", "~> 1.2"
   gem.add_development_dependency "bundler", "~> 1.0"
+  gem.add_development_dependency "minitest-rails", "~> 2.2.0"
   gem.add_development_dependency "mocha", "~> 1.1.0"
 end
