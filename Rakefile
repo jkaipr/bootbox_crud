@@ -9,8 +9,8 @@ end
 require 'rake/testtask'
 require 'fileutils'
 
-desc 'Default: run generator tests.'
-task default: :test
+desc 'Default: run generator and javascript tests'
+task default: [:test, :test_javascript]
 
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
@@ -20,10 +20,14 @@ Rake::TestTask.new(:test) do |t|
   t.warning = false
 end
 
+task :test_javascript do
+  exec 'cd test/dummy && bundle exec rake jasmine:ci'
+end
+
 task :clean_tmp do
   FileUtils.rm_rf('test/tmp')
 end
 
-# Rake::Task['test'].enhance do
-#   Rake::Task['clean_tmp'].invoke
-# end
+Rake::Task['test'].enhance do
+  Rake::Task['clean_tmp'].invoke
+end
