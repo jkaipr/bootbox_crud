@@ -4,6 +4,7 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 require 'bootbox_crud'
+require 'bootstrap-sass'
 
 module Dummy
   class Application < Rails::Application
