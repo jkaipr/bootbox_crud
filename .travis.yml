@@ -8,5 +8,4 @@ before_install:
   - "export DISPLAY=:99.0"
   - "export JASMINE_BROWSER=firefox"
 before_script:
- - "cd test/dummy && bundle exec rake db:migrate RAILS_ENV=test"
- 
+ - "cd test/dummy && bundle exec rake db:migrate RAILS_ENV=test && cd ../.."
