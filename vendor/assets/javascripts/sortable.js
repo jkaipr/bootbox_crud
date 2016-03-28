@@ -13,7 +13,7 @@
   clickEvent = 'click';//touchDevice ? 'touchstart' : 'click';
 
   addEventListener = function(el, event, handler) {
-    if (el.addEventListener !== null) {
+    if (el.addEventListener) {
       return el.addEventListener(event, handler, false);
     } else {
       return el.attachEvent("on" + event, handler);
@@ -23,10 +23,10 @@
   sortable = {
     init: function(options) {
       var table, tables, _i, _len, _results;
-      if (options === null) {
+      if (!options) {
         options = {};
       }
-      if (options.selector === null) {
+      if (!options.selector) {
         options.selector = SELECTOR;
       }
       tables = document.querySelectorAll(options.selector);
@@ -39,7 +39,7 @@
     },
     initTable: function(table) {
       var i, th, ths, _i, _len, _ref;
-      if (((_ref = table.tHead) !== null ? _ref.rows.length : undefined) !== 1) {
+      if (((_ref = table.tHead) ? _ref.rows.length : undefined) !== 1) {
         return;
       }
       if (table.getAttribute('data-sortable-initialized') === 'true') {
