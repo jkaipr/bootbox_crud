@@ -21,6 +21,11 @@ module Dummy
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.generators do |g|
+      g.template_engine :haml_modal_crud
+      g.resource_route  :modal_crud_route
+    end
   end
 end
 
