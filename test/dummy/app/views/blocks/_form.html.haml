@@ -1,0 +1,13 @@
+.container-fluid
+  = simple_form_for(@block, remote_form_options) do |f|
+    = f.error_notification
+    = f.error :base, :error_method => :to_sentence
+
+    .form-inputs
+      = f.input :name
+      = f.input :width
+      = f.input :height
+      = f.input :depth
+
+    .form-actions.col-sm-7.col-sm-offset-5
+      = f.button :submit

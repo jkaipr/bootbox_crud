@@ -1,0 +1,8 @@
+#content.show
+  %p#notice= notice
+
+  .form-horizontal
+    = show_value 'Name', @block.name
+    = show_value 'Width', @block.width
+    = show_value 'Height', @block.height
+    = show_value 'Depth', @block.depth

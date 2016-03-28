@@ -3,5 +3,6 @@
 
 
 //!!! Generator adds after this line, do not delete it !!!
+BBCrud.Models.add('Block', '/blocks/', 'block');
 // e.g. BBCrud.Models.add('Customer', '/customers/', 'customer');
 

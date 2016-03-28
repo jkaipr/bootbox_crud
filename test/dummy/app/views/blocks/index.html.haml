@@ -1,0 +1,38 @@
+.container-fluid
+  %h1 Listing blocks
+
+
+  .table_responsive
+    %table.table.table-hover.table-striped.sortable-theme-minimal{data: {sortable: ''}}
+      %thead
+        %tr
+          %th
+            ID
+          %th{data:{sorted: 'true', sorted_direction: 'ascending' }}
+            Name
+          %th Width
+          %th Height
+          %th Depth
+          %th{data:{sortable: 'false'}}
+
+      %tbody
+        - @blocks.each do |block|
+          %tr
+            %td
+              = block.id
+            %td{data:{value: block.name.gsub(' ', '').downcase, entity: 'Block', action: 'show', id: (block.id) }}
+              = link_to block.name, '#'
+
+            %td= block.width
+            %td= block.height
+            %td= block.depth
+            %td
+              = link_to '#', :class => 'btn-sm btn-primary', data: { entity: 'Block', action: 'update', id: (block.id) } do
+                %i.fa.fa-edit
+                EDIT
+
+  %hr
+  %p
+    = link_to '#', :class => 'btn btn-success', data: { entity: 'Block', action: 'create' } do
+      %i.fa.fa-plus
+        = 'New Block'
