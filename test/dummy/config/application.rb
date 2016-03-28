@@ -25,6 +25,8 @@ module Dummy
     config.generators do |g|
       g.template_engine :haml_modal_crud
       g.resource_route  :modal_crud_route
+      g.stylesheets     false
+      g.javascripts     false
     end
   end
 end
