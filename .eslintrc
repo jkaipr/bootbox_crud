@@ -5,7 +5,7 @@ ecmaFeatures:
 env:
   amd: false
   browser: true
-  es6: false
+  es6: true
   jquery: true
   node: false
 
