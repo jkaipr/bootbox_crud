@@ -30,7 +30,7 @@ module BootboxCrud
       end
 
       def remote_form_options
-        { remote: true }.merge(form_options)
+        { remote: true, authenticity_token: true }.merge(form_options)
       end
     end
   end
