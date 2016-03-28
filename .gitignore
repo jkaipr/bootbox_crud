@@ -18,6 +18,7 @@
 
 ## Environment normalisation:
 /.bundle/
+/.idea/
 /vendor/bundle
 /lib/bundler/man/
 
