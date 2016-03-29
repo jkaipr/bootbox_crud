@@ -11,7 +11,7 @@ This is what you get after running ```rails g model Block name width:integer hei
 
 All modal views are using AJAX and template partials, which makes it behave faster compared to full page reloads.
 
-Makes it easy to open up a modal for selected action and model on click by [setting](#links-to-modals) data attributes to HTML tags, no additional javascript needed. 
+Makes it easy to open up a modal for selected action and model on click by [setting](#user-content-links-to-modals) data attributes to HTML tags, no additional javascript needed. 
 
 ## Initial setup
 
