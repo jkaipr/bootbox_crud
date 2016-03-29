@@ -9,7 +9,7 @@ module BootboxCrud
       require 'jquery-turbolinks'
       require 'remotipart'
 
-      initializer "bootbox_crud.configure_view" do |app|
+      initializer 'bootbox_crud.configure_view' do
         ActiveSupport.on_load :action_view do
           include BootboxCrud::ActionView::Helpers
         end
