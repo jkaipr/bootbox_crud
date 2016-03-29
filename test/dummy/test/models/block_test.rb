@@ -1,7 +1,11 @@
-require 'test_helper'
+require "test_helper"
 
 class BlockTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def block
+    @block ||= Block.new
+  end
+
+  def test_valid
+    assert block.valid?
+  end
 end
