@@ -21,7 +21,7 @@ Rake::TestTask.new(:test) do |t|
 end
 
 task :test_javascript do
-  exec 'cd test/dummy && bundle exec rake jasmine:ci'
+  exec 'cd test/dummy && bundle exec rake spec:javascript'
 end
 
 task :clean_tmp do
