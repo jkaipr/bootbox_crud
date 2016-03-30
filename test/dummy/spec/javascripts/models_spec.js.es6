@@ -10,8 +10,8 @@ describe("BBCrud.Models.add", () => {
   it("Creates new model object on BBCrud.Models", () => {
     BBCrud.Models.add('Box', '/boxes/', 'box');
     expect(BBCrud.Models.Box).toBeDefined();
-    expect(BBCrud.Models.Box.create).toBeDefined();
-    expect(BBCrud.Models.Box.update).toBeDefined();
+    expect(BBCrud.Models.Box.new).toBeDefined();
+    expect(BBCrud.Models.Box.edit).toBeDefined();
     expect(BBCrud.Models.Box.show).toBeDefined();
   });
 });
