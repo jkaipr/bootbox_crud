@@ -201,24 +201,24 @@ Adding ```class='show'``` to root node with ```id='content'``` is mandatory to g
 Making links modal enabled is done via data attributes.
 
     data-entity='Model'
-    data-action='update'
+    data-action='edit'
     data-id='1'
 
 In haml:
 
-    = link_to '#', :class => 'btn btn-primary btn-sm', data: { id: @model.id, entity: 'Model', action: 'update' } do
+    = link_to '#', :class => 'btn btn-primary btn-sm', data: { id: @model.id, entity: 'Model', action: 'edit' } do
       %i.fa.fa-edit
       edit
 
 There is a global button handler searching for any DOM nodes with 'data-entity' attribute. Click events of such nodes lead to modals.
 The logic is simple, clicking on a node with the above values will lead to this function invocation:
 
-    BBCrud.Model.update({id: 1})
+    BBCrud.Model.edit({id: 1})
 
 Available actions are:
 
- * create
- * update
+ * new
+ * edit
  * show
 
 #### Adding a new model to modals on the client side
@@ -237,9 +237,9 @@ Filled in for unipolars:
 
 The above function invocation creates these functions:
 
-    BBCrud.Unipolar.create
-    BBCrud.Unipolar.update
-    BBCrud.Unipolar.show
+    BBCrud.Models.Unipolar.new
+    BBCrud.Models.Unipolar.edit
+    BBCrud.Models.Unipolar.show
 
 Now you should be all set to click your data-entity links and call the functions from your scripts if needed.
 
@@ -274,7 +274,7 @@ The important detail to notice is the use of ```modals/form``` partial, which wa
  * Make sure your form has ```remote: true``` or preferably ```remote_form_options``` with simple\_form, the layout should be the same as in the example in form section of this README
  * Add create, update and destroy .js.erb files to the view directory and fill them according to this guide
  * Add your model definition as a new line to models.js
- * Add ```data-entity```, ```data-action``` and ```data-id``` with the right values to an element on the page and click it, or call ``BBCrud.ModelName.create/update/show()`` from your javascript to show the modal
+ * Add ```data-entity```, ```data-action``` and ```data-id``` with the right values to an element on the page and click it, or call ``BBCrud.Models.ModelName.new/edit/show()`` from your javascript to show the modal
 
 
 ## Custom scaffold source files
@@ -304,6 +304,13 @@ If you want have a peek or override some of the scaffolding templates, here is a
 **controller scaffold template override**
 
     lib/templates/rails/scaffold_controller/controller.rb
+
+# Changelog
+ **0.2.0** - some breaking changes
+ 
+  * defined model actions moved to BBCrud.Models.<ModelName>, declaring them directly on  BBCrud.<ModelName> was dangerous, new models could overwrite basic functionality [Models, Modals, Alert] 
+  * renamed actions on models to new, edit, show [previously was create, update, show]
+  * added a few more jasmine specs
 
 # TODOs
 

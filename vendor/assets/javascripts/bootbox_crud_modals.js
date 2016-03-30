@@ -149,7 +149,7 @@ BBCrud.Modals = (function () {
                 var args = $.extend({}, link.data());
                 delete args['entity'];
                 delete args['action'];
-                BBCrud[link.data('entity')][link.data('action')].call(link, args);
+                BBCrud.Models[link.data('entity')][link.data('action')].call(link, args);
                 return false;
             });
         }
@@ -161,10 +161,10 @@ BBCrud.Modals.initBtnHandler();
 
 BBCrud.Models = (function () {
     function defineModelActions(modelName, actions) {
-        if (typeof BBCrud[modelName] === 'undefined') {
-            BBCrud[modelName] = actions;
+        if (typeof BBCrud.Models[modelName] === 'undefined') {
+            BBCrud.Models[modelName] = actions;
         } else {
-            $.extend(BBCrud[modelName], actions);
+            $.extend(BBCrud.Models[modelName], actions);
         }
     }
 
@@ -174,10 +174,10 @@ BBCrud.Models = (function () {
                 var baseUrl = url;
 
                 return {
-                    create: function (data) {
+                    new: function (data) {
                         BBCrud.Modals.create('Create ' + titleName, baseUrl, null, data);
                     },
-                    update: function (data) {
+                    edit: function (data) {
                         BBCrud.Modals.update(data.id, 'Edit ' + titleName, baseUrl, undefined, false, undefined, undefined, data);
                     },
                     show: function (data) {
@@ -200,7 +200,6 @@ BBCrud.Models = (function () {
             }());
             defineModelActions(modelName, action);
         }
-
     };
 }());
 

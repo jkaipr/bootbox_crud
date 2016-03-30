@@ -27,12 +27,12 @@
             %td= block.height
             %td= block.depth
             %td
-              = link_to '#', :class => 'btn-sm btn-primary', data: { entity: 'Block', action: 'update', id: (block.id) } do
+              = link_to '#', :class => 'btn-sm btn-primary', data: { entity: 'Block', action: 'edit', id: (block.id) } do
                 %i.fa.fa-edit
                 EDIT
 
   %hr
   %p
-    = link_to '#', :class => 'btn btn-success', data: { entity: 'Block', action: 'create' } do
+    = link_to '#', :class => 'btn btn-success', data: { entity: 'Block', action: 'new' } do
       %i.fa.fa-plus
         = 'New Block'
