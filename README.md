@@ -1,6 +1,4 @@
 [![Build Status](https://travis-ci.org/jkaipr/bootbox_crud.png)](https://travis-ci.org/jkaipr/bootbox_crud)
-[![Test Coverage](https://codeclimate.com/github/jkaipr/bootbox_crud/badges/coverage.png)](https://codeclimate.com/github/jkaipr/bootbox_crud/coverage)
-[![Code Climate](https://codeclimate.com/github/jkaipr/bootbox_crud.png)](https://codeclimate.com/github/jkaipr/bootbox_crud)
 # Bootbox modal CRUD
 
 Provides Rails modal CRUD scaffolding powered by bootstrap & bootbox & simple_form. Built for use with Turbolinks, jQuery and Twitter Bootstrap 3.
